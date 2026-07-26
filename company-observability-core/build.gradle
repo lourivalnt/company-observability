@@ -1,0 +1,6 @@
+dependencies {
+    api 'org.slf4j:slf4j-api:2.0.17'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
+    testImplementation 'org.assertj:assertj-core:3.27.6'
+}

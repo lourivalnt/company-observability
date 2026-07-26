@@ -1,0 +1,7 @@
+dependencies {
+
+    api project(':company-observability-autoconfigure')
+
+    api 'org.springframework.boot:spring-boot-starter:3.5.7'
+    api 'org.springframework.boot:spring-boot-starter-web:3.5.7'
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'company-observability'
+
+include 'company-observability-core'
+include 'company-observability-autoconfigure'
+include 'company-observability-spring-boot-starter'

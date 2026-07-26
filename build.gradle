@@ -1,0 +1,79 @@
+plugins {
+    id 'org.springframework.boot' version '3.5.7' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+allprojects {
+    group = 'br.com.company.platform'
+    version = '1.0.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+
+        withSourcesJar()
+    }
+
+    /*
+     * Workaround para o IntelliJ, que tenta executar essa tarefa
+     * individualmente em cada submódulo.
+     */
+    if (tasks.findByName('prepareKotlinBuildScriptModel') == null) {
+        tasks.register('prepareKotlinBuildScriptModel')
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom(
+                    org.springframework.boot.gradle.plugin
+                            .SpringBootPlugin
+                            .BOM_COORDINATES
+            )
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'localRepository'
+                url = uri(
+                        "${rootProject.layout.buildDirectory.get()}/repository"
+                )
+            }
+        }
+    }
+}
+
+/*
+ * O starter não possui classes Java.
+ * Por isso, o Javadoc é habilitado somente nos módulos com código.
+ */
+configure([
+        project(':company-observability-core'),
+        project(':company-observability-autoconfigure')
+]) {
+    java {
+        withJavadocJar()
+    }
+}

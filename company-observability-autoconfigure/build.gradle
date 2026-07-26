@@ -1,0 +1,14 @@
+dependencies {
+
+    api project(':company-observability-core')
+
+    api 'org.springframework.boot:spring-boot-autoconfigure:3.5.7'
+
+    implementation 'org.springframework:spring-web:6.2.12'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.5.7'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.5.7'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web:3.5.7'
+}
