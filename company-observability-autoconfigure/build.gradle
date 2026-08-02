@@ -11,4 +11,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.5.7'
     testImplementation 'org.springframework.boot:spring-boot-starter-web:3.5.7'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

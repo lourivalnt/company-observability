@@ -10,9 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Map;
 
-public class CorrelationIdFilter
-        extends OncePerRequestFilter {
+public class CorrelationIdFilter extends OncePerRequestFilter {
 
     private final ObservabilityProperties properties;
     private final CorrelationIdGenerator generator;
@@ -32,19 +32,21 @@ public class CorrelationIdFilter
             FilterChain filterChain)
             throws ServletException, IOException {
 
+        Map<String, String> previousContext =
+                LogContext.copy();
+
         String headerName = properties
                 .getCorrelation()
                 .getHeaderName();
 
         String correlationId =
-                request.getHeader(headerName);
-
-        if (isBlank(correlationId)) {
-            correlationId = generateCorrelationId();
-        }
+                resolveCorrelationId(
+                        request,
+                        headerName
+                );
 
         try {
-            if (!isBlank(correlationId)) {
+            if (correlationId != null) {
                 LogContext.put(
                         LogContext.CORRELATION_ID,
                         correlationId
@@ -67,13 +69,21 @@ public class CorrelationIdFilter
             );
 
         } finally {
-            LogContext.remove(
-                    LogContext.CORRELATION_ID
-            );
+            LogContext.restore(previousContext);
         }
     }
 
-    private String generateCorrelationId() {
+    private String resolveCorrelationId(
+            HttpServletRequest request,
+            String headerName) {
+
+        String correlationId =
+                request.getHeader(headerName);
+
+        if (!isBlank(correlationId)) {
+            return correlationId;
+        }
+
         if (!properties
                 .getCorrelation()
                 .isGenerateWhenMissing()) {
