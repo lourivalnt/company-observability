@@ -1,3 +1,14 @@
 spring:
   application:
     name: company-observability
+  observability:
+    logging:
+      file-enabled: true
+      file-name: logs/loan-orchestrator.json
+
+
+#Em ambientes Kubernetes, Docker ou OpenShift, recomenda-se manter:
+#  company:
+#    observability:
+#      logging:
+#        file-enabled: false

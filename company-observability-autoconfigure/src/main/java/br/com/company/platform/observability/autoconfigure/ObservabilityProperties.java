@@ -9,8 +9,9 @@ public class ObservabilityProperties {
 
     private boolean enabled = true;
 
-    private final Correlation correlation =
-            new Correlation();
+    private final Correlation correlation = new Correlation();
+
+    private final Logging logging = new Logging();
 
     public boolean isEnabled() {
         return enabled;
@@ -22,6 +23,10 @@ public class ObservabilityProperties {
 
     public Correlation getCorrelation() {
         return correlation;
+    }
+
+    public Logging getLogging() {
+        return logging;
     }
 
     public static class Correlation {
@@ -47,9 +52,7 @@ public class ObservabilityProperties {
             return headerName;
         }
 
-        public void setHeaderName(
-                String headerName) {
-
+        public void setHeaderName(String headerName) {
             this.headerName = headerName;
         }
 
@@ -73,6 +76,108 @@ public class ObservabilityProperties {
 
             this.includeInResponse =
                     includeInResponse;
+        }
+    }
+
+    public static class Logging {
+
+        /**
+         * Ativa os defaults corporativos de logging.
+         */
+        private boolean enabled = true;
+
+        /**
+         * Formato nativo do Spring Boot:
+         * logstash, ecs ou gelf.
+         */
+        private String format = "logstash";
+
+        /**
+         * Ambiente incluído no JSON.
+         */
+        private String environment = "local";
+
+        /**
+         * Geração de arquivo é opt-in.
+         * Em containers, o padrão será stdout.
+         */
+        private boolean fileEnabled = false;
+
+        /**
+         * Nome do arquivo quando fileEnabled=true.
+         */
+        private String fileName = "logs/application.json";
+
+        /**
+         * Limite do stack trace incluído no JSON.
+         */
+        private int stacktraceMaxLength = 4096;
+
+        /**
+         * Profundidade máxima do stack trace.
+         */
+        private int stacktraceMaxThrowableDepth = 30;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getFormat() {
+            return format;
+        }
+
+        public void setFormat(String format) {
+            this.format = format;
+        }
+
+        public String getEnvironment() {
+            return environment;
+        }
+
+        public void setEnvironment(String environment) {
+            this.environment = environment;
+        }
+
+        public boolean isFileEnabled() {
+            return fileEnabled;
+        }
+
+        public void setFileEnabled(boolean fileEnabled) {
+            this.fileEnabled = fileEnabled;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+
+        public int getStacktraceMaxLength() {
+            return stacktraceMaxLength;
+        }
+
+        public void setStacktraceMaxLength(
+                int stacktraceMaxLength) {
+
+            this.stacktraceMaxLength =
+                    stacktraceMaxLength;
+        }
+
+        public int getStacktraceMaxThrowableDepth() {
+            return stacktraceMaxThrowableDepth;
+        }
+
+        public void setStacktraceMaxThrowableDepth(
+                int stacktraceMaxThrowableDepth) {
+
+            this.stacktraceMaxThrowableDepth =
+                    stacktraceMaxThrowableDepth;
         }
     }
 }

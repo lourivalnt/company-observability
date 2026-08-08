@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+br.com.company.platform.observability.autoconfigure.logging.StructuredLoggingEnvironmentPostProcessor
