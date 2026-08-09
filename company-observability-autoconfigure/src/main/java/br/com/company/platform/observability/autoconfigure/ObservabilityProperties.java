@@ -9,15 +9,22 @@ public class ObservabilityProperties {
 
     private boolean enabled = true;
 
-    private final Correlation correlation = new Correlation();
+    private final Correlation correlation =
+            new Correlation();
 
-    private final Logging logging = new Logging();
+    private final Logging logging =
+            new Logging();
+
+    private final Metrics metrics =
+            new Metrics();
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(
+            boolean enabled
+    ) {
         this.enabled = enabled;
     }
 
@@ -27,6 +34,10 @@ public class ObservabilityProperties {
 
     public Logging getLogging() {
         return logging;
+    }
+
+    public Metrics getMetrics() {
+        return metrics;
     }
 
     public static class Correlation {
@@ -44,7 +55,9 @@ public class ObservabilityProperties {
             return enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled(
+                boolean enabled
+        ) {
             this.enabled = enabled;
         }
 
@@ -52,7 +65,9 @@ public class ObservabilityProperties {
             return headerName;
         }
 
-        public void setHeaderName(String headerName) {
+        public void setHeaderName(
+                String headerName
+        ) {
             this.headerName = headerName;
         }
 
@@ -61,8 +76,8 @@ public class ObservabilityProperties {
         }
 
         public void setGenerateWhenMissing(
-                boolean generateWhenMissing) {
-
+                boolean generateWhenMissing
+        ) {
             this.generateWhenMissing =
                     generateWhenMissing;
         }
@@ -72,8 +87,8 @@ public class ObservabilityProperties {
         }
 
         public void setIncludeInResponse(
-                boolean includeInResponse) {
-
+                boolean includeInResponse
+        ) {
             this.includeInResponse =
                     includeInResponse;
         }
@@ -106,7 +121,8 @@ public class ObservabilityProperties {
         /**
          * Nome do arquivo quando fileEnabled=true.
          */
-        private String fileName = "logs/application.json";
+        private String fileName =
+                "logs/application.json";
 
         /**
          * Limite do stack trace incluído no JSON.
@@ -122,7 +138,9 @@ public class ObservabilityProperties {
             return enabled;
         }
 
-        public void setEnabled(boolean enabled) {
+        public void setEnabled(
+                boolean enabled
+        ) {
             this.enabled = enabled;
         }
 
@@ -130,7 +148,9 @@ public class ObservabilityProperties {
             return format;
         }
 
-        public void setFormat(String format) {
+        public void setFormat(
+                String format
+        ) {
             this.format = format;
         }
 
@@ -138,7 +158,9 @@ public class ObservabilityProperties {
             return environment;
         }
 
-        public void setEnvironment(String environment) {
+        public void setEnvironment(
+                String environment
+        ) {
             this.environment = environment;
         }
 
@@ -146,7 +168,9 @@ public class ObservabilityProperties {
             return fileEnabled;
         }
 
-        public void setFileEnabled(boolean fileEnabled) {
+        public void setFileEnabled(
+                boolean fileEnabled
+        ) {
             this.fileEnabled = fileEnabled;
         }
 
@@ -154,7 +178,9 @@ public class ObservabilityProperties {
             return fileName;
         }
 
-        public void setFileName(String fileName) {
+        public void setFileName(
+                String fileName
+        ) {
             this.fileName = fileName;
         }
 
@@ -163,8 +189,8 @@ public class ObservabilityProperties {
         }
 
         public void setStacktraceMaxLength(
-                int stacktraceMaxLength) {
-
+                int stacktraceMaxLength
+        ) {
             this.stacktraceMaxLength =
                     stacktraceMaxLength;
         }
@@ -174,10 +200,75 @@ public class ObservabilityProperties {
         }
 
         public void setStacktraceMaxThrowableDepth(
-                int stacktraceMaxThrowableDepth) {
-
+                int stacktraceMaxThrowableDepth
+        ) {
             this.stacktraceMaxThrowableDepth =
                     stacktraceMaxThrowableDepth;
+        }
+    }
+
+    public static class Metrics {
+
+        /**
+         * Ativa os defaults corporativos de métricas.
+         */
+        private boolean enabled = true;
+
+        /**
+         * Ambiente adicionado como tag nas métricas.
+         */
+        private String environment = "local";
+
+        /**
+         * Adiciona a tag application.
+         */
+        private boolean applicationTagEnabled = true;
+
+        /**
+         * Adiciona a tag environment.
+         */
+        private boolean environmentTagEnabled = true;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(
+                boolean enabled
+        ) {
+            this.enabled = enabled;
+        }
+
+        public String getEnvironment() {
+            return environment;
+        }
+
+        public void setEnvironment(
+                String environment
+        ) {
+            this.environment = environment;
+        }
+
+        public boolean isApplicationTagEnabled() {
+            return applicationTagEnabled;
+        }
+
+        public void setApplicationTagEnabled(
+                boolean applicationTagEnabled
+        ) {
+            this.applicationTagEnabled =
+                    applicationTagEnabled;
+        }
+
+        public boolean isEnvironmentTagEnabled() {
+            return environmentTagEnabled;
+        }
+
+        public void setEnvironmentTagEnabled(
+                boolean environmentTagEnabled
+        ) {
+            this.environmentTagEnabled =
+                    environmentTagEnabled;
         }
     }
 }

@@ -1,1 +1,2 @@
 br.com.company.platform.observability.autoconfigure.correlation.CorrelationIdAutoConfiguration
+br.com.company.platform.observability.autoconfigure.metrics.MetricsAutoConfiguration
