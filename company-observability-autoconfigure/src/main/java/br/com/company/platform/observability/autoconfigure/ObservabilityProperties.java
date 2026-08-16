@@ -18,6 +18,13 @@ public class ObservabilityProperties {
     private final Metrics metrics =
             new Metrics();
 
+    private final Actuator actuator =
+            new Actuator();
+
+    public Actuator getActuator() {
+        return actuator;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -269,6 +276,94 @@ public class ObservabilityProperties {
         ) {
             this.environmentTagEnabled =
                     environmentTagEnabled;
+        }
+    }
+
+    public static class Actuator {
+
+        private boolean enabled = true;
+
+        private String basePath =
+                "/actuator";
+
+        private String exposure =
+                "health,info,metrics";
+
+        private String showDetails =
+                "never";
+
+        private boolean probesEnabled =
+                true;
+
+        private boolean additionalProbePaths =
+                false;
+
+        private boolean infoEnabled =
+                true;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getBasePath() {
+            return basePath;
+        }
+
+        public void setBasePath(String basePath) {
+            this.basePath = basePath;
+        }
+
+        public String getExposure() {
+            return exposure;
+        }
+
+        public void setExposure(String exposure) {
+            this.exposure = exposure;
+        }
+
+        public String getShowDetails() {
+            return showDetails;
+        }
+
+        public void setShowDetails(String showDetails) {
+            this.showDetails = showDetails;
+        }
+
+        public boolean isProbesEnabled() {
+            return probesEnabled;
+        }
+
+        public void setProbesEnabled(
+                boolean probesEnabled) {
+
+            this.probesEnabled =
+                    probesEnabled;
+        }
+
+        public boolean isAdditionalProbePaths() {
+            return additionalProbePaths;
+        }
+
+        public void setAdditionalProbePaths(
+                boolean additionalProbePaths) {
+
+            this.additionalProbePaths =
+                    additionalProbePaths;
+        }
+
+        public boolean isInfoEnabled() {
+            return infoEnabled;
+        }
+
+        public void setInfoEnabled(
+                boolean infoEnabled) {
+
+            this.infoEnabled =
+                    infoEnabled;
         }
     }
 }
